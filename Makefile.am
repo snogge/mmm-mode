@@ -12,3 +12,11 @@ dist_lisp_LISP = mmm-compat.el mmm-vars.el mmm-utils.el mmm-auto.el \
 info_TEXINFOS = mmm.texi
 
 EXTRA_DIST = README.Mason FAQ
+
+TESTS = tests/highlighting.el tests/html-erb.el
+TEST_EXTENSIONS = .el
+EL_LOG_COMPILER = $(srcdir)/ert
+AM_EL_LOG_FLAGS = -Q --batch -L $(srcdir) -l
+EL_LOG_DRIVER = $(srcdir)/ert-driver
+
+# See also `elisp-comp' for another hack.
