@@ -25,8 +25,9 @@
 
 ;;; Commentary:
 
-;; This file contains definitions of ERB and EJS submode classes, and well as
-;; support functions for proper indentation.
+;; This file contains definitions of ERB (Embedded RuBy) and EJS
+;; (Embedded JavaScript) submode classes, and well as support
+;; functions for proper indentation.
 
 ;; Usage:
 
