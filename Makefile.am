@@ -12,3 +12,8 @@ dist_lisp_LISP = mmm-compat.el mmm-vars.el mmm-utils.el mmm-auto.el \
 info_TEXINFOS = mmm.texi
 
 EXTRA_DIST = README.Mason FAQ
+
+TESTS = tests/highlighting.el tests/html-erb.el tests/variables.el
+TEST_EXTENSIONS = .el
+AM_EL_LOG_FLAGS = -L $(srcdir) -L $(srcdir)/tests
+EL_LOG_DRIVER = $(srcdir)/ert-driver
