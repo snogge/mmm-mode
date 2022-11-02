@@ -3,6 +3,7 @@ aclocal.m4
 configure
 config.log
 config.status
+Makefile
 Makefile.in
 elc-stamp
 mmm.info*
@@ -13,4 +14,3 @@ stamp-vti
 version.texi
 mmm-mode-pkg.el
 mmm-mode-autoloads.el
-mmm.html
