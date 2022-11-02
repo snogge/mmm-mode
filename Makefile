@@ -7,6 +7,7 @@ builddir = .
 EMACS ?= emacs
 MAKEINFO = makeinfo
 MAKEINFOFLAGS =
+INSTALL ?= install
 
 ELFILES = mmm-auto.el mmm-class.el mmm-cmds.el mmm-compat.el mmm-cweb.el \
           mmm-defaults.el mmm-erb.el mmm-mason.el mmm-mode.el mmm-myghty.el \
@@ -48,3 +49,43 @@ clean-html:
 clean: clean-lisp clean-info clean-html
 
 .PHONY: check clean clean-html clean-info clean-lisp docs html info
+.PHONY: install uninstall
+
+# Installation and uninstallation targets for completeness
+
+prefix = /usr/local
+datarootdir = ${prefix}/share
+datadir = ${datarootdir}
+infodir = ${datarootdir}/info
+lispdir = ${datadir}/emacs/site-lisp
+
+install: install-info install-elc install-el
+
+install-elc: $(ELCFILES)
+	$(INSTALL) -d $(DESTDIR)$(lispdir)
+	$(INSTALL) -m 0644 $(ELCFILES) $(DESTDIR)$(lispdir)
+
+install-el:
+	$(INSTALL) -d $(DESTDIR)$(lispdir)
+	$(INSTALL) -m 0644 $(ELFILES) $(DESTDIR)$(lispdir)
+
+uninstall: uninstall-info uninstall-elc uninstall-el
+
+uninstall-elc:
+	$(RM) -f $(addprefix $(DESTDIR)$(lispdir)/,$(ELCFILES))
+
+uninstall-el:
+	$(RM) -f $(addprefix $(DESTDIR)$(lispdir)/,$(ELFILES))
+
+install-info: mmm.info
+	$(INSTALL) -d $(DESTDIR)$(infodir)
+	$(INSTALL) -m 0644 $^ $(DESTDIR)$(infodir)
+	for ifile in $^; do \
+		install-info --info-dir=$(DESTDIR)$(infodir) $(DESTDIR)$(infodir)/$$ifile ;\
+	done
+
+uninstall-info:
+	for ifile in $^; do \
+		install-info --info-dir=$(DESTDIR)$(infodir) --remove $(DESTDIR)$(infodir)/$$ifile ;\
+		$(RM) $(DESTDIR)$(infodir)/$$ifile ;\
+	done
