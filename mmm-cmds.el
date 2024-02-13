@@ -31,7 +31,9 @@
 
 (require 'cl-lib)
 (require 'font-lock)
-(require 'mmm-compat)
+(eval-and-compile
+  (when (featurep 'xemacs)
+    (require 'mmm-compat)))
 (require 'mmm-vars)
 (require 'mmm-class)
 
