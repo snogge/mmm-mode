@@ -3,6 +3,8 @@ AC_INIT([mmm-mode], [0.5.8])
 AC_CONFIG_SRCDIR([mmm-mode.el])
 AM_INIT_AUTOMAKE([info-in-builddir])
 
+AC_CONFIG_FILES([Makefile])
+
 AM_PATH_LISPDIR
 
 AS_IF([test "$EMACS" = no],[AC_MSG_ERROR([no Emacs program found])])
@@ -19,4 +21,4 @@ dnl Checks for typedefs, structures, and compiler characteristics.
 
 dnl Checks for library functions.
 
-AC_OUTPUT(Makefile)
+AC_OUTPUT
