@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT([mmm-mode], [0.5.8])
+AC_INIT([mmm-mode], [0.5.11])
 AC_CONFIG_SRCDIR([mmm-mode.el])
 AM_INIT_AUTOMAKE([info-in-builddir])
 
