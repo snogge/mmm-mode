@@ -35,7 +35,7 @@
   ;; This is a hack.
   ;; Locally bind `noninteractive' to nil and set upp hooks as
   ;; `global-font-lock-mode' would have.  Assumes
-  ;; global-font-lock-mode has been avaluated so all the required
+  ;; global-font-lock-mode has been evaluated so all the required
   ;; global-font-lock-mode-X exist.
   (declare (indent 'defun))
   `(let ((after-change-major-mode-hook after-change-major-mode-hook)
@@ -43,10 +43,14 @@
 	 (change-major-mode-hook change-major-mode-hook)
 	 noninteractive)
      ;; the enable part of the global minor mode
-     (add-hook 'after-change-major-mode-hook
-	       #'global-font-lock-mode-enable-in-buffers)
+     (if (fboundp 'global-font-lock-mode-enable-in-buffers)
+	 (add-hook 'after-change-major-mode-hook
+		   #'global-font-lock-mode-enable-in-buffers))
      (add-hook 'find-file-hook #'global-font-lock-mode-check-buffers)
-     (add-hook 'change-major-mode-hook #'global-font-lock-mode-cmhh)
+     (if (fboundp 'global-font-lock-mode-cmhh)
+	 (add-hook 'change-major-mode-hook #'global-font-lock-mode-cmhh))
+     (if (not (fboundp 'global-font-lock-mode-cmhh))
+	 (global-font-lock-mode))
      ,@body))
 
 (provide 'mmm-test-util)
